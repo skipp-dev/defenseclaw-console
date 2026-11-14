@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DefenseClaw Console</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="title">
+    <h1>DefenseClaw Console</h1>
+    <span class="as-of" id="as-of">loading …</span>
+  </div>
+  <div class="badges" id="badges"></div>
+</header>
+
+<main>
+  <section class="tiles" id="tiles" aria-label="Decisions in the last 24 hours"></section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Decisions per hour <span class="muted">(24 h)</span></h2>
+      <button class="btn quiet" id="toggle-table" type="button">as table</button>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div id="chart" class="chart"></div>
+    <div id="chart-table" hidden></div>
+  </section>
+
+  <div class="two-col">
+    <section class="card">
+      <h2>Mode</h2>
+      <div id="mode"></div>
+    </section>
+    <section class="card">
+      <h2>Per session <span class="muted">(24 h)</span></h2>
+      <div id="sessions" class="list short"></div>
+    </section>
+  </div>
+
+  <section class="card" id="events-card">
+    <div class="card-head">
+      <h2>Events <span class="muted">– click a row to see the full content</span>
+        <span class="paused" id="events-paused" hidden>· paused while a row is open</span></h2>
+      <div class="filters">
+        <select id="filter-session" aria-label="Session"><option value="">all sessions</option></select>
+        <select id="filter-kind" aria-label="Kind">
+          <option value="">all kinds</option>
+          <option value="tool_invocation">Tool calls</option>
+          <option value="llm_prompt">Prompts</option>
+          <option value="llm_response">Responses</option>
+          <option value="hook_decision">Decisions</option>
+          <option value="scan-finding">Scan findings</option>
+          <option value="watcher-block">Watcher</option>
+          <option value="quarantine">Quarantine</option>
+          <option value="protected-file-changed">Protected files</option>
+        </select>
+        <select id="filter-verdict" aria-label="Result">
+          <option value="">all results</option>
+          <option value="allowed">✓ allowed (24 h)</option>
+          <option value="would_block">⚠ would block (24 h)</option>
+          <option value="blocked">⛔ blocked (24 h)</option>
+          <option value="unknown">? unknown (24 h)</option>
+        </select>
+      </div>
+    </div>
+    <div id="events" class="list"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Alerts <span class="muted" id="alert-count"></span></h2>
+      <div class="filters">
+        <select id="filter-severity" aria-label="Severity">
+          <option value="">all severities</option>
+          <option>CRITICAL</option><option>HIGH</option><option>MEDIUM</option><option>LOW</option><option>INFO</option>
+        </select>
+        <input id="filter-alert" type="search" placeholder="search target or rule" aria-label="Search alerts">
+      </div>
+    </div>
+    <div id="alerts" class="list"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>Skills and plugins</h2>
+      <div class="filters">
+        <select id="filter-package" aria-label="Kind">
+          <option value="skill">Skills</option><option value="plugin">Plugins</option>
+        </select>
+        <input id="filter-name" type="search" placeholder="search name" aria-label="Search name">
+        <label class="check"><input type="checkbox" id="flagged-only"> flagged only</label>
+      </div>
+    </div>
+    <div id="packages" class="list"></div>
+  </section>
+
+  <div class="two-col">
+    <section class="card">
+      <h2>Tools <span class="muted">– block / allow list</span></h2>
+      <div class="form-row">
+        <input id="tool-name" placeholder="tool name, e.g. Bash or WebFetch" aria-label="Tool name">
+        <button class="btn" data-tool-action="tool_block" type="button">block</button>
+        <button class="btn" data-tool-action="tool_allow" type="button">allow</button>
+        <button class="btn" data-tool-action="tool_unblock" type="button">remove from list</button>
+      </div>
+      <div id="tools"></div>
+    </section>
+    <section class="card">
+      <h2>Checkpoints</h2>
+      <div id="checkpoints"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <details>
+      <summary><h2 class="inline">Settings <span class="muted">(~/.defenseclaw/config.yaml)</span></h2></summary>
+      <pre id="config" class="code"></pre>
+    </details>
+  </section>
+</main>
+
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+<div id="tip" class="tip" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

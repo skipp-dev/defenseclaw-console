@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  launchd agent that keeps the console running and starts it at login.
+  Replace /PATH/TO/defenseclaw-console with the folder you cloned, then:
+    cp examples/com.example.defenseclaw-console.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.example.defenseclaw-console.plist
+  Note: DefenseClaw's protected-file watch raises a HIGH alert if an AI agent writes this file.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.defenseclaw-console</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/PATH/TO/defenseclaw-console/start.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>30</integer>
+  <key>StandardOutPath</key>
+  <string>/PATH/TO/defenseclaw-console/console.out</string>
+  <key>StandardErrorPath</key>
+  <string>/PATH/TO/defenseclaw-console/console.err</string>
+</dict>
+</plist>

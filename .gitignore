@@ -1,0 +1,14 @@
+.superpowers/
+__pycache__/
+.pytest_cache/
+.key
+URL.txt
+console.log
+console.out
+console.err
+# old German names (local only)
+.schluessel
+ADRESSE.txt
+konsole.log
+konsole.out
+konsole.err
