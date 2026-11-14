@@ -55,7 +55,7 @@ prompts and change enforcement.
 ## Requirements
 
 - macOS (tested on macOS 27, Apple silicon). Linux should work but is untested.
-- DefenseClaw 1.0.8 or later, installed per user and initialised with the Claude Code connector
+- DefenseClaw 1.0.8 or later (tested with 1.0.8 and 1.0.9), installed per user and initialised with the Claude Code connector
   (`defenseclaw quickstart --connector claudecode`). The console expects the CLI at
   `~/.local/bin/defenseclaw` and the audit database at `~/.defenseclaw/audit.db`.
 - Python 3.9 or later, standard library only. By default `start.sh` uses DefenseClaw's own virtual
